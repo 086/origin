@@ -40,13 +40,11 @@ public class Program {
   File[] files;
   files = fd.listFiles();
   if (files != null)
-   for (File file: files) {
-    if (file.isDirectory()) {
+   for (File file: files)
+    if (file.isDirectory())
      rScan(file, sb);
-    } else {
+    else
      sb.append(String.format("%" + deep + "s<file name=\"%s\">\r\n", "", file.getName()));
-    }
-   }
   deep--;
   sb.append(String.format("%" + deep + "s</catalog>\r\n", ""));
  }
