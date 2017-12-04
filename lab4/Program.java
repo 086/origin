@@ -1,6 +1,8 @@
 package pkg;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.BufferedReader;
 import java.io.PrintWriter;
 
 public class Program {
@@ -9,10 +11,20 @@ public class Program {
 
  public static void main(String[] args) throws IOException {
   //
-  File fd = (args.length < 1) ?
-   new File(".") : new File(args[0]);
+  File fd = null;
+  //
+  try (BufferedReader br = new BufferedReader(new FileReader("path.txt"))) {
+   fd = new File(br.readLine());
+  } catch (IOException ioe) {
+   System.out.println("path.txt\n:файл не найден");
+   ioe.printStackTrace();
+   System.exit(2);
+  }
+  //
   File[] files;
   files = fd.listFiles();
+  //
+
   //
   if (files == null) {
    System.out.println(fd + "\n: такой директории не существует");
